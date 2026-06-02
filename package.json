@@ -1,0 +1,65 @@
+{
+  "name": "atazuki",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Atazuki - Reproductor musical retro con reproduccion local y YouTube",
+  "author": "Atapaz",
+  "keywords": ["music", "player", "retro", "cassette", "youtube", "electron", "react"],
+  "main": "electron.js",
+  "scripts": {
+    "postinstall": "node scripts/install-yt-dlp.cjs",
+    "dev": "vite",
+    "electron": ".\\node_modules\\.bin\\electron.cmd electron.js",
+    "start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && npm run electron\"",
+    "dist": "vite build && electron-builder"
+  },
+  "build": {
+    "appId": "com.atazuki.app",
+    "productName": "Atazuki",
+    "files": [
+      "dist/**/*",
+      "electron.js",
+      "preload.js"
+    ],
+    "extraResources": [
+      {
+        "from": "bin",
+        "to": "bin",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "src/assets/Atapaz/IconoExe.ico",
+      "signAndEditExecutable": false
+    },
+    "directories": {
+      "output": "release"
+    }
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^9.2.1",
+    "electron": "^42.3.0",
+    "electron-builder": "^26.8.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "icojs": "^0.23.0",
+    "png-to-ico": "^3.0.1",
+    "png2icons": "^2.0.1",
+    "sharp": "^0.34.5",
+    "vite": "^8.0.12",
+    "wait-on": "^9.0.10"
+  }
+}
